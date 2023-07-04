@@ -1,23 +1,49 @@
 
-export const Paciente = ({pacienteSolo}) => {
+export const Paciente = ({ pacienteSolo,setPaciente, eliminarPaciente }) => {
+    const {nombre, propietario, email, alta, sintomas, id} = pacienteSolo;
+    const handleEliminar = () => {
+        const respuesta = confirm('Desea eliminar este paciente?');
+        if(respuesta){
+            eliminarPaciente(id)
+        }
     
+    }
     return (
         <div className="m-3 bg-white shadow-md px-5 py-10 rounded-xl">
             <p className="font-bold mb-3 text-gray-700 uppercase">Nombre: {''}
-                <span className="font-normal normal-case">{pacienteSolo.nombre}</span>
+                <span className="font-normal normal-case">{nombre}</span>
             </p>
             <p className="font-bold mb-3 text-gray-700 uppercase">Propietario: {''}
-                <span className="font-normal normal-case">{pacienteSolo.propietario}</span>
+                <span className="font-normal normal-case">{propietario}</span>
             </p>
             <p className="font-bold mb-3 text-gray-700 uppercase">Email: {''}
-                <span className="font-normal normal-case">{pacienteSolo.email}</span>
+                <span className="font-normal normal-case">{email}</span>
             </p>
             <p className="font-bold mb-3 text-gray-700 uppercase">Fecha Alta: {''}
-                <span className="font-normal normal-case">{pacienteSolo.alta}</span>
+                <span className="font-normal normal-case">{alta}</span>
             </p>
             <p className="font-bold mb-3 text-gray-700 uppercase">Sintomas: {''}
-                <span className="font-normal normal-case">{pacienteSolo.sintomas}</span>
+                <span className="font-normal normal-case">{sintomas}</span>
             </p>
+            <div className="flex justify-end gap-5">
+                <button
+                 type="button"
+                 className="py-2 px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-bold
+                 uppercase rounded-lg"
+                //  se hace un callback por que tiene un parametro de entrada y solo se ejecutara cuando se haga click
+                 onClick={ ()=> setPaciente(pacienteSolo)}
+                 >
+                    Editar
+                </button>
+                <button
+                 type="button"
+                 className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold
+                 uppercase rounded-lg"
+                 onClick={ handleEliminar}
+                 >
+                    Eliminar
+                </button>
+            </div>
         </div>
     )
 }
